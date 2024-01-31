@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: {
-  impots = [
+  imports = [
     ./hardware-configuration.nix
   ];
 
