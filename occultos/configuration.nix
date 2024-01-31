@@ -37,13 +37,13 @@
   system.nixos.distroName = lib.mkForce "OccultOS";
   system.nixos.distroId = lib.mkForce "occultos";
 
-  networking.hostName = "occultos";
+  networking.hostName = "warren";
 
-  boot.loader.systemd-boot.enable = true;
+  #boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.devices = [ "nodev" ];
 
   users.users = {
-    witch = {
-      initalPassowrd = "witch";
+    bunbun = {
       isNormalUser = true;
       extraGroups = ["wheel"];
     };
