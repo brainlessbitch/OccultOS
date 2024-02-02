@@ -22,7 +22,7 @@
   in {
     nixosConfigurations."occultos" = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs system; };
-      modules = [ ./occultos/configuration.nix ];
+      modules = [ ./occultos/config.nix ];
     };
 
     homeConfigurations."bunbun" = home-manager.lib.homeManagerConfiguration {
