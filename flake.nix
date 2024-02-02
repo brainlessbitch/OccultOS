@@ -1,6 +1,8 @@
 {
+  description = "My witchy little distro / NixOS config";
+
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -10,27 +12,23 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
+  outputs = { nixpkgs, home-manager, ... } @ inputs: 
+  let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
-    nixosConfigurations = {
-      occultos = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./occultos/configuration.nix];
-      };
+    nixosConfigurations."occultos" = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs system; };
+      modules = [ ./occultos/configuration.nix ];
     };
 
-    homeConfigurations = {
-      "bunbun@warren" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        module = [./home-manager/home.nix];
-      };
+    homeConfigurations."bunbun" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = { inherit inputs; };
+      module = [ ./home-manager/home.nix ];
     };
   };
 }

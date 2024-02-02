@@ -1,56 +1,38 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{ lib, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
   ];
 
-  nixpkgs = {
-    overlays = [];
+  # Nix
+  nixpkgs.config.allowUnfree = true;
+  nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+      auto-optimise-store = true;
 
-    config = {
-      allowUnfree = true;
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];      
     };
   };
 
-  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs
-  (_: lib.isType "flake")) inputs);
-
-  nix.nixPath = ["/etc/nix/path"];
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
-
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    auto-optimise-store = true;
-
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
-
+  # ディストロ名の変更
   system.nixos.distroName = lib.mkForce "OccultOS";
   system.nixos.distroId = lib.mkForce "occultos";
 
-  networking.hostName = "warren";
-
-  #boot.loader.systemd-boot.enable = true;
-  boot.loader.grub.devices = [ "nodev" ];
-
-  users.users = {
-    bunbun = {
-      isNormalUser = true;
-      extraGroups = ["wheel"];
-    };
+  # ユーザー
+  users.users.bunbun = {
+    isNormalUser = true;
+    extraGroups = ["wheel"];
   };
+
+  # ネットワーキング
+  networking = {
+    hostName = "warren";
+    networkmanager.enable = true;
+  }
+
+  # ブートローダ
+  boot.loader.systemd-boot.enable = true;
 
   programs.hyprland = {
     enable = true;
