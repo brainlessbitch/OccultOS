@@ -28,7 +28,7 @@
     homeConfigurations."bunbun" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = { inherit inputs; };
-      module = [ ./home-manager/home.nix ];
+      modules = [ ./home-manager/home.nix ];
     };
   };
 }

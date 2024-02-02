@@ -19,7 +19,11 @@
   system.nixos.distroName = lib.mkForce "OccultOS";
   system.nixos.distroId = lib.mkForce "occultos";
 
-  environment.systemPackages = with pkgs; [vim git];
+  environment.systemPackages = with pkgs; [
+    home-manger
+    vim
+    git
+  ];
 
   # ユーザー
   users.users.bunbun = {
