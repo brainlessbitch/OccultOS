@@ -6,5 +6,5 @@ in {
         enable = true;
         userName = name;
         userEmail = email;
-      }
+      };
   }
