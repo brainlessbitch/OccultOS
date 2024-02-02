@@ -19,10 +19,12 @@
   system.nixos.distroName = lib.mkForce "OccultOS";
   system.nixos.distroId = lib.mkForce "occultos";
 
+  environment.systemPackages = with pkgs; [vim git];
+
   # ユーザー
   users.users.bunbun = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = ["networkmanager" "wheel"];
   };
 
   # ネットワーキング
