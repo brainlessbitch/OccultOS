@@ -20,7 +20,7 @@
   system.nixos.distroId = lib.mkForce "occultos";
 
   environment.systemPackages = with pkgs; [
-    home-manger
+    home-manager
     vim
     git
   ];
