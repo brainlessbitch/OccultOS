@@ -1,5 +1,11 @@
 { pkgs, ... }: {
-  imports = [ ./git.nix ./foot.nix ./zsh.nix ./firefox.nix ];
+  imports = [
+    ./firefox.nix
+    ./foot.nix
+    ./git.nix 
+    ./starship.nix
+    ./zsh.nix
+  ];
 
   home = {
     username = "bunbun";
