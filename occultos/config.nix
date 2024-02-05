@@ -15,10 +15,6 @@
     };
   };
 
-  # ディストロ名の変更
-  system.nixos.distroName = lib.mkForce "OccultOS";
-  system.nixos.distroId = lib.mkForce "occultos";
-
   environment.systemPackages = with pkgs; [
     home-manager
     vim
@@ -28,8 +24,11 @@
   # ユーザー
   users.users.bunbun = {
     isNormalUser = true;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "audio" "wheel"];
   };
+
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   # ネットワーキング
   networking = {
@@ -37,11 +36,21 @@
     networkmanager.enable = true;
   };
 
+  sound.enable = true;
+
   # ブートローダ
   boot.loader.systemd-boot.enable = true;
 
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
+
+  system = {
+    nixos = {
+      distroName = lib.mkForce "OccultOS";
+      distroId = lib.mkForce "occultos";
+    };
+    stateVersion = "23.05";
   };
 }

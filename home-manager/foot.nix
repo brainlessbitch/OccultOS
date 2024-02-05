@@ -3,6 +3,7 @@
     enable = true;
     settings = {
       main = {
+	font = "MapleMonoNF:size=10";
       	underline-offset = 1;
       	underline-thickness = 1;
 	box-drawings-uses-font-glyphs = true;      	

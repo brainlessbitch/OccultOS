@@ -1,10 +1,21 @@
 { pkgs, ... }: {
-  imports = [ ./git.nix ./foot.nix ];
+  imports = [ ./git.nix ./foot.nix ./zsh.nix ./firefox.nix ];
 
-  home.username = "bunbun";
-  home.homeDirectory = "/home/bunbun";
+  home = {
+    username = "bunbun";
+    homeDirectory = "/home/bunbun";
+    packages = with pkgs; [
+      wl-clipboard
+      dunst
+      discord
+      lsd
+    ];
+  };
 
-  home.packages = with pkgs; [ wl-clipboard ];
+  xdg.desktopEntries."discord" = {
+    name = "Discord"; 
+    exec = "/usr/bin/discord --enable-featurs=UseOzonePlatform --ozone-platform=wayland";
+  };
 
   programs.home-manager.enable = true;
   home.stateVersion = "23.05";
