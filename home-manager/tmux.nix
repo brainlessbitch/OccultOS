@@ -1,5 +1,5 @@
 {
-  prograams.tmux = {
+  programs.tmux = {
     enable = true;
     baseIndex = 1;
     extraConfig = 
@@ -13,7 +13,7 @@
       bind-key -n C-c kill-window
       bind-key -n C-c kill-pane
 
-      bind-key -n C-r source-file ~/.tmux.conf
+      bind-key -n C-r source-file ~/.config/tmux/tmux.conf
 
       bind-key -n C-q kill-session
 
@@ -56,5 +56,5 @@
 
       set -g mouse on
     '';
-  }
+  };
 }
