@@ -21,14 +21,14 @@
       ''
         zstyle ":completion:*" verbose true
         zstyle ":completion:*:*:*:*:*" menu select
-        zstyle ":completion:*:default" list-color ${(s.:.)LS_COLORS}
+        zstyle ":completion:*:default" list-color ''${(s.:.)LS_COLORS}
         zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}"
       '';
 
     # .zprofile
     profileExtra = 
       ''
-        if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+        if [ -z "''${DISPLAY}" ] && [ "''${XDG_VTNR}" -eq 1 ]; then
           exec Hyprland
         fi
       '';

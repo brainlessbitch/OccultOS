@@ -2,7 +2,7 @@
   programs.starship = {
     enable = true;
     settings = {
-      add_newline = false
+      add_newline = false;
       format = builtins.concatStringsSep "" 
       [
         "$git_branch"
@@ -14,6 +14,14 @@
       directory = {
         format = "[ [$read_only]($read_only_style)$path ]($style)";
         style = "bg:black";
+        read_only = "󰌾 ";
+        read_only_style = "fg:red bg:black";
+        truncation_symbol = "…/";
+        truncation_length = 3;
+      };
+      character.format = " ";
+      git_branch = {
+        
       };
     };
   };
