@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, lib, ... }: {
   imports = [
     ./firefox.nix
     ./foot.nix
@@ -6,6 +6,7 @@
     ./starship.nix
     ./tmux.nix
     ./zsh.nix
+    ./lsd.nix
   ];
 
   home = {
@@ -15,7 +16,7 @@
       wl-clipboard
       dunst
       discord
-      lsd
+      brightnessctl
     ];
   };
 
